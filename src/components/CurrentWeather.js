@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { fetchAPi } from "../data/ApiKey";
+import { useEffect, useState } from "react";
+import { fetchAPi } from "../data/fetchAPi";
 
 function WeatherApp() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   
-
-  function handleLocation() {
+  useEffect(()=>{
     navigator.geolocation.getCurrentPosition(success, error);
-  }
+  },[])
 
 
   function success(position) {
@@ -27,7 +26,6 @@ function WeatherApp() {
 
   return (
     <>
-      {(!location) ? <button onClick={handleLocation}>Get Location</button> : null}
       {location && !weather ? <p>Loading weather data...</p> : null}
       {weather ? (
         <div>
@@ -40,6 +38,3 @@ function WeatherApp() {
 }
 
 export default WeatherApp;
-
-//const APIRoute = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${key}`
-
