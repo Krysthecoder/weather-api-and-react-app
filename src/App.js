@@ -25,14 +25,12 @@ const App = () => {
 
   return (
     <div className="App">
-
-      {/* {location && !weather ? <p>Loading weather data...</p> : null} */}
       {weather ? (
         <div>
           <h1>The current Weather in {weather.timezone} is:</h1>
           <p>Location: {weather.current.temp}</p>
         </div>
-      ) : <p>No hay :V</p> }
+      ) : <p>Unable to retrieve Data, please try again later {weather}</p>}
 
     </div>
   );
