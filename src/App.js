@@ -14,9 +14,10 @@ const App = () => {
   function success(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    setLocation({ latitude, location });
+    setLocation({ latitude, longitude });
 
-    setWeather(fetchAPi(latitude, longitude));
+    fetchAPi(latitude, longitude).then(data => setWeather(data)).catch(error => setWeather(null));
+    console.log(weather)
   };
 
   function error() {
@@ -28,9 +29,14 @@ const App = () => {
       {weather ? (
         <div>
           <h1>The current Weather in {weather.timezone} is:</h1>
-          <p>Location: {weather.current.temp}</p>
+          <p>Temperature: {weather.current.temp}</p>
+          <p>Humidity: {weather.current.humidity}*</p>
+          <p>Sunset: {weather.current.sunset}</p>
+          <p>Sky State: {weather.current.weather[0].description}</p>
         </div>
       ) : <p>Unable to retrieve Data, please try again later {weather}</p>}
+
+
 
     </div>
   );
